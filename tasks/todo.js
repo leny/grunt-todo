@@ -6,45 +6,71 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
+"use strict";
 
-module.exports = function(grunt) {
+var chalk = require( "chalk" );
+var table = require( "text-table" );
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+module.exports = function( grunt ) {
 
-  grunt.registerMultiTask('todo', 'Find TODO, FIXME and NOTE inside project files', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
-
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
+  grunt.registerMultiTask( "todo", "Find TODO, FIXME and NOTE inside project files", function() {
+    var options = this.options( {
+      marks: [
+        {
+          name: "FIX",
+          pattern: /FIXME/,
+          color: "red"
+        },
+        {
+          name: "TODO",
+          pattern: /TODO/,
+          color: "yellow"
+        },
+        {
+          name: "NOTE",
+          pattern: /NOTE/,
+          color: "blue"
         }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+      ]
+    } ),
+      marks = [],
+      allowed_colors = [ "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "gray" ];
 
-      // Handle options.
-      src += options.punctuation;
+    for( var mark, i = -1; mark = options.marks[ ++i ] ; ) {
+      marks.push( {
+        name: mark.name || mark.pattern.toString(),
+        color: ( allowed_colors.indexOf( mark.color.toLowerCase() ) === -1 ) ? "cyan" : mark.color.toLowerCase(),
+        regex: ( mark.pattern instanceof RegExp ) ? mark.pattern : new RegExp( mark.pattern ),
+      } );
+    }
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+    this.filesSrc.filter( function( filepath ) {
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
-  });
+      return grunt.file.exists( filepath );
+
+    } ).forEach( function( filepath ) {
+      var results = [];
+      grunt.file.read( filepath ).split( /\r*\n/ ).map( function( line, index ) {
+
+        marks.forEach( function( mark ) {
+          if( mark.regex.test( line ) ) {
+            results.push( [
+              chalk.gray( "\tline " + ( index + 1 ) ),
+              chalk[ mark.color ]( mark.name ),
+              chalk.white.italic( line.trim().length > 80 ? ( line.trim().substr( 0, 80 ) + "…" ) : line.trim() )
+            ] );
+          }
+        } );
+      } );
+
+      if( results.length ) {
+        grunt.log.writeln();
+        grunt.log.writeln( chalk.underline( filepath ) );
+        grunt.log.writeln();
+        grunt.log.writeln( table( results ) );
+      }
+
+    } );
+  } );
 
 };
