@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="fr_BE">
+    <head>
+        <meta charset="UTF-8" />
+        <title>leny.me - Pierre-Antoine Delnatte, Webdeveloper</title>
+
+        <link rel="stylesheet" href="styles/styles.css" />
+
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- NOTE move this in another file ? -->
+        <script>
+            var iMyAge = ( new Date() ).getFullYear() - 1985;
+            document.title = "Pierre-Antoine Delnatte, " + iMyAge + "ans, Webdeveloper.";
+        </script>
+    </head>
+    <body>
+        <div id="container">
+            <section>
+                <header>
+                    <h1>
+                        leny.me
+                    </h1>
+                    <h2>
+                        <!-- FIXME document.write, seriously ? -->
+                        Pierre-Antoine Delnatte, <script> document.write( iMyAge ); </script>ans, Webdeveloper.
+                    </h2>
+                    <h3>
+                        Dev freelance hyperactif, prof de web altruiste, <br />maître du monde en dilettante.
+                    </h3>
+                </header>
+                <figure>
+                    <img src="./me.jpg" alt="Pierre-Antoine &quot;Leny&quot; Delnatte" />
+                </figure>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="http://pierre-antoine.delnatte.be" rel="external">
+                                CV
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://flatland.be" rel="external">
+                                flatLand!
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://blog.leny.me" rel="external">
+                                blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://cash-cache.com" rel="external">
+                                Cash-Cache
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://webappero.be" rel="external">
+                                WebApp'ero
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="socials">
+                        <li>
+                            <a href="http://www.facebook.com/pierreantoine.delnatte" rel="external" id="facebook" title="facebook"><span>facebook</span></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/leny_be" rel="external" id="twitter" title="twitter"><span>twitter</span></a>
+                        </li>
+                        <li>
+                            <a href="http://be.linkedin.com/pub/pierre-antoine-delnatte/a/78a/777/" rel="external" id="linkedin" title="linkedin"><span>linkedin</span></a>
+                        </li>
+                        <li>
+                            <a href="http://dribbble.com/leny" rel="external" id="dribbble" title="dribbble"><span>dribbble</span></a>
+                        </li>
+                        <li>
+                            <a href="http://github.com/leny" rel="external" id="github" title="github"><span>github</span></a>
+                        </li>
+                        <li>
+                            <a href="http://instagram.com/lenymccormick" rel="external" id="instagram" title="instagram"><span>instagram</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        </div>
+        <!-- TODO Hey, look ! I'm a todo in a TODO !!! -->
+    </body>
+</html>
