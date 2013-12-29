@@ -37,47 +37,69 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.marks
+Type: `Array`
+Default value: 
+```js
+{
+  name: "FIX",
+  pattern: /FIXME/,
+  color: "red"
+},
+{
+  name: "TODO",
+  pattern: /TODO/,
+  color: "yellow"
+},
+{
+  name: "NOTE",
+  pattern: /NOTE/,
+  color: "blue"
+}
+```
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+An Array of objects representing the marks to find inside the files.  
+`pattern` can be a string or a `RegExp`.
+`color` is a color-name string allowed by [chalk](https://npmjs.org/package/chalk). If the color is not one of these, *grunt-todo* will use **cyan**.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default options are used to shows the *TODO*, *FIXME* and *NOTE* marks founded in the given files.
 
 ```js
 grunt.initConfig({
   todo: {
     options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    src: [
+      'test/*'
+    ],
   },
 });
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, custom options are used to shows the *TODO* and *BURP* marks founded in the given files.
 
 ```js
 grunt.initConfig({
   todo: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      marks: [
+        {
+          pattern: "BURP",
+          color: "pink"
+        },
+        {
+          name: "TODO",
+          pattern: /TODO/,
+          color: "yellow"
+        }
+      ]
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    src: [
+      'test/*'
+    ],
   },
 });
 ```
@@ -86,4 +108,15 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+* **2013/12/29** : v0.1.0
+
+## Notes
+
+This is my first grunt plugin, *quick & dirty* coded for using in one of my personal projects.  
+I'm completely aware that I can write this plugin better... and I will. :)
+
+## TODO
+
+* Review & refactor
+* Writing Unit tests ;)
