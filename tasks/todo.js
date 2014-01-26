@@ -46,7 +46,7 @@ module.exports = function( grunt ) {
 
     this.filesSrc.filter( function( filepath ) {
 
-      return grunt.file.exists( filepath );
+      return grunt.file.exists( filepath ) && grunt.file.isFile( filepath );
 
     } ).forEach( function( filepath ) {
       var results = [];
