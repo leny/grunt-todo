@@ -1,6 +1,6 @@
 {
   "name": "grunt-todo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Find TODO, FIXME and NOTE inside project files",
   "keywords": [
     "gruntplugin", "todo", "find", "fixme", "note"
@@ -11,6 +11,12 @@
     "email": "info@flatland.be",
     "url": "http://leny.me"
   },
+  "contributors" : [
+    {
+      "name": "Zach Wolf",
+      "url": "http://zachwolf.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/Leny/grunt-todo.git"
