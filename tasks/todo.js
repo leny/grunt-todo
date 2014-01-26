@@ -13,8 +13,6 @@ var table = require( "text-table" );
 
 module.exports = function( grunt ) {
 
-  var strTest;
-
   grunt.registerMultiTask( "todo", "Find TODO, FIXME and NOTE inside project files", function() {
     var options = this.options( {
       marks: [
@@ -55,11 +53,11 @@ module.exports = function( grunt ) {
       grunt.file.read( filepath ).split( /\r*\n/ ).map( function( line, index ) {
 
         marks.forEach( function( mark ) {
-          if( mark.regex.test( line ) ) {
+          var result;
+          if( result = mark.regex.exec( line ) ) {
 
-            strTest = mark.regex.exec(line);
-            line = line.substring(strTest.index + strTest[0].length);
-            
+            line = line.substring(result.index + result[0].length);
+
             results.push( [
               chalk.gray( "\tline " + ( index + 1 ) ),
               chalk[ mark.color ]( mark.name ),
