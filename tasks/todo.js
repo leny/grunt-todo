@@ -74,6 +74,7 @@ module.exports = function( grunt ) {
         grunt.log.writeln( chalk.underline( filepath ) );
         grunt.log.writeln();
         grunt.log.writeln( table( results ) );
+        logFile += 'This file was auto-generated with the [Grunt TODO Generator](https://github.com/brutalhonesty/grunt-todo)'
         grunt.file.write( 'grunt-TODO.md', logFile );
       }
 
