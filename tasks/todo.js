@@ -70,7 +70,6 @@ module.exports = function( grunt ) {
       } );
 
       if( results.length ) {
-        //console.log(results);
         grunt.log.writeln();
         grunt.log.writeln( chalk.underline( filepath ) );
         grunt.log.writeln();
