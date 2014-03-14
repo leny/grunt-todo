@@ -62,6 +62,13 @@ An Array of objects representing the marks to find inside the files.
 `pattern` can be a string or a `RegExp`.
 `color` is a color-name string allowed by [chalk](https://npmjs.org/package/chalk). If the color is not one of these, *grunt-todo* will use **cyan**.
 
+#### options.file
+Type: `String` (file path)
+Default value: `false`
+
+A file path to log the founded marks, in *markdown* format.  
+If `false` is given, the file will not be written.
+
 ### Usage Examples
 
 #### Default Options
@@ -79,7 +86,7 @@ grunt.initConfig({
 ```
 
 #### Custom Options
-In this example, custom options are used to shows the *TODO* and *BURP* marks founded in the given files.
+In this example, custom options are used to shows the *TODO* and *BURP* marks founded in the given files, and write the results on a file named `report.md`
 
 ```js
 grunt.initConfig({
@@ -95,7 +102,8 @@ grunt.initConfig({
           pattern: /TODO/,
           color: "yellow"
         }
-      ]
+      ],
+      file: "report.md"
     },
     src: [
       'test/*'
