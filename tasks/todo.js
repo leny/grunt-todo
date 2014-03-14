@@ -77,7 +77,7 @@ module.exports = function( grunt ) {
       }
 
     } );
-    logFile += '\nThis file was auto-generated with the [Grunt TODO Generator](https://github.com/brutalhonesty/grunt-todo)\n';
+    logFile += '\nThis file was auto-generated with the [Grunt TODO Generator](https://github.com/leny/grunt-todo)\n';
     grunt.file.write( 'grunt-TODO.md', logFile );
   } );
 
