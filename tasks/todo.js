@@ -14,28 +14,34 @@ var table = require( "text-table" );
 module.exports = function( grunt ) {
 
   grunt.registerMultiTask( "todo", "Find TODO, FIXME and NOTE inside project files", function() {
-    var logFile = 'Grunt TODO\n=========\n';
     var options = this.options( {
-      marks: [
-        {
-          name: "FIX",
-          pattern: /FIXME/,
-          color: "red"
-        },
-        {
-          name: "TODO",
-          pattern: /TODO/,
-          color: "yellow"
-        },
-        {
-          name: "NOTE",
-          pattern: /NOTE/,
-          color: "blue"
-        }
-      ]
-    } ),
+        marks: [
+          {
+            name: "FIX",
+            pattern: /FIXME/,
+            color: "red"
+          },
+          {
+            name: "TODO",
+            pattern: /TODO/,
+            color: "yellow"
+          },
+          {
+            name: "NOTE",
+            pattern: /NOTE/,
+            color: "blue"
+          }
+        ],
+        file: false
+      } ),
+      allowed_colors = [ "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "gray" ],
       marks = [],
-      allowed_colors = [ "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "gray" ];
+      logFileLines = [];
+
+    if( options.file ) {
+      logFileLines.push( "# Grunt TODO" );
+      logFileLines.push( "" );
+    }
 
     for( var mark, i = -1; mark = options.marks[ ++i ] ; ) {
       marks.push( {
@@ -50,7 +56,8 @@ module.exports = function( grunt ) {
       return grunt.file.exists( filepath ) && grunt.file.isFile( filepath );
 
     } ).forEach( function( filepath ) {
-      var results = [];
+      var results = [],
+          fileResults = [];
       grunt.file.read( filepath ).split( /\r*\n/ ).map( function( line, index ) {
 
         marks.forEach( function( mark ) {
@@ -59,12 +66,15 @@ module.exports = function( grunt ) {
 
             line = line.substring(result.index + result[0].length);
 
-            logFile += '* ' + filepath + ':' + (index + 1) + line + '\n';
             results.push( [
               chalk.gray( "\tline " + ( index + 1 ) ),
               chalk[ mark.color ]( mark.name ),
               chalk.white.italic( line.trim().length > 80 ? ( line.trim().substr( 0, 80 ) + "…" ) : line.trim() )
             ] );
+
+            if( options.file ) {
+              fileResults.push( "* **" + mark.name + "** `(line " + ( index + 1 ) + ")` " + line );
+            }
           }
         } );
       } );
@@ -76,9 +86,20 @@ module.exports = function( grunt ) {
         grunt.log.writeln( table( results ) );
       }
 
+      if( options.file && fileResults.length ) {
+        logFileLines.push( "## " + filepath );
+        logFileLines.push( "" );
+        logFileLines = logFileLines.concat( fileResults );
+        logFileLines.push( "" );
+      }
+
     } );
-    logFile += '\nThis file was auto-generated with the [Grunt TODO Generator](https://github.com/leny/grunt-todo)\n';
-    grunt.file.write( 'grunt-TODO.md', logFile );
+
+    if( options.file ) {
+      grunt.file.write( options.file, logFileLines.join( "\n" ) );
+      grunt.log.writeln();
+      grunt.log.writeln( "Logged in " + chalk.yellow( options.file ) );
+    }
   } );
 
 };
