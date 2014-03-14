@@ -1,6 +1,6 @@
 # grunt-todo
 
-> Find TODO, FIXME and NOTE inside project files
+> Find TODO, FIXME and NOTE inside project files.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -38,7 +38,7 @@ grunt.initConfig({
 ### Options
 
 #### options.marks
-Type: `Array`
+Type: `Array`  
 Default value: 
 ```js
 {
@@ -63,7 +63,7 @@ An Array of objects representing the marks to find inside the files.
 `color` is a color-name string allowed by [chalk](https://npmjs.org/package/chalk). If the color is not one of these, *grunt-todo* will use **cyan**.
 
 #### options.file
-Type: `String` (file path)
+Type: `String` (file path)  
 Default value: `false`
 
 A file path to log the founded marks, in *markdown* format.  
@@ -118,6 +118,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## Release History
 
 * **2013/12/29** : v0.1.0
+* **2014/01/26** : v0.1.1
+* **2014/01/26** : v0.1.2
+* **2014/03/14** : v0.2.0
 
 ## Notes
 
