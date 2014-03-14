@@ -1,9 +1,13 @@
 {
   "name": "grunt-todo",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Find TODO, FIXME and NOTE inside project files",
   "keywords": [
-    "gruntplugin", "todo", "find", "fixme", "note"
+    "gruntplugin",
+    "todo",
+    "find",
+    "fixme",
+    "note"
   ],
   "homepage": "https://github.com/Leny/grunt-todo",
   "author": {
@@ -11,10 +15,14 @@
     "email": "info@flatland.be",
     "url": "http://leny.me"
   },
-  "contributors" : [
+  "contributors": [
     {
       "name": "Zach Wolf",
       "url": "http://zachwolf.com"
+    },
+    {
+      "name": "Adam",
+      "url": "http://quailcity.com"
     }
   ],
   "repository": {
@@ -40,9 +48,9 @@
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6",
-    "grunt": "~0.4.1"
+    "grunt": "~0.4"
   },
   "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": "~0.4"
   }
 }
