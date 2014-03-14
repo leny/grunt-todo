@@ -14,6 +14,7 @@ var table = require( "text-table" );
 module.exports = function( grunt ) {
 
   grunt.registerMultiTask( "todo", "Find TODO, FIXME and NOTE inside project files", function() {
+    var logFile = 'Grunt TODO\n=========\n';
     var options = this.options( {
       marks: [
         {
@@ -58,6 +59,7 @@ module.exports = function( grunt ) {
 
             line = line.substring(result.index + result[0].length);
 
+            logFile += '* ' + filepath + ':' + (index + 1) + line + '\n';
             results.push( [
               chalk.gray( "\tline " + ( index + 1 ) ),
               chalk[ mark.color ]( mark.name ),
@@ -75,6 +77,8 @@ module.exports = function( grunt ) {
       }
 
     } );
+    logFile += '\nThis file was auto-generated with the [Grunt TODO Generator](https://github.com/leny/grunt-todo)\n';
+    grunt.file.write( 'grunt-TODO.md', logFile );
   } );
 
 };
