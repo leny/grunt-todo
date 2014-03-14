@@ -42,7 +42,8 @@ module.exports = function(grunt) {
               pattern: /TODO/,
               color: "yellow"
             }
-          ]
+          ],
+          file: "report.md"
         },
         src: [
           'test/*'
