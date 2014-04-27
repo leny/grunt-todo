@@ -2,6 +2,8 @@
 
 > Find TODO, FIXME and NOTE inside project files.
 
+* * *
+
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
 
