@@ -73,7 +73,7 @@ module.exports = function( grunt ) {
             ] );
 
             if( options.file ) {
-              fileResults.push( "-" + ( !!options.github_boxes ? " [ ]" : "" ) + " **" + mark.name + "** `(line " + ( index + 1 ) + ")` " + line );
+              fileResults.push( "-" + ( !!options.githubBoxes ? " [ ]" : "" ) + " **" + mark.name + "** `(line " + ( index + 1 ) + ")` " + line );
             }
           }
         } );

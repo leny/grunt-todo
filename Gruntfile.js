@@ -44,7 +44,7 @@ module.exports = function(grunt) {
             }
           ],
           file: "report.md",
-          github_boxes: true
+          githubBoxes: true
         },
         src: [
           'test/*'

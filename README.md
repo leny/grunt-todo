@@ -73,7 +73,7 @@ Default value: `false`
 A file path to log the founded marks, in *markdown* format.  
 If `false` is given, the file will not be written.
 
-#### options.github_boxes
+#### options.githubBoxes
 Type: `Boolean`  
 Default value: `false`
 
@@ -114,7 +114,7 @@ grunt.initConfig({
         }
       ],
       file: "report.md",
-      github_boxes: true
+      githubBoxes: true
     },
     src: [
       'test/*'
