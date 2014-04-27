@@ -121,6 +121,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 * **2014/01/26** : v0.1.1
 * **2014/01/26** : v0.1.2
 * **2014/03/14** : v0.2.0
+* **2014/04/27** : v0.2.1
 
 ## Notes
 
