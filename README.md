@@ -1,11 +1,13 @@
 # grunt-todo
 
+[![NPM version](https://badge.fury.io/js/grunt-todo.png)](http://badge.fury.io/js/grunt-todo) [![Dependency Status](https://david-dm.org/leny/grunt-todo.png)](https://david-dm.org/leny/grunt-todo)
+
 > Find TODO, FIXME and NOTE inside project files.
 
 * * *
 
 ## Getting Started
-This plugin requires Grunt `~0.4.1`
+This plugin requires Grunt `~0.4`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -122,7 +124,16 @@ grunt.initConfig({
 ```
 
 ## Contributing
+
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
+### Contributors
+
+* [brutalhonesty](https://github.com/brutalhonesty)
+* [zachwolf](https://github.com/zachwolf)
+* [edwellbrook](https://github.com/edwellbrook)
+
+Many thanks to them. :)
 
 ## Release History
 

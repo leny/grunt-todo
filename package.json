@@ -47,7 +47,7 @@
     "text-table": "~0.2"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6",
+    "grunt-contrib-jshint": "~0.10",
     "grunt": "~0.4"
   },
   "peerDependencies": {
