@@ -73,7 +73,7 @@ module.exports = function( grunt ) {
             ] );
 
             if( options.file ) {
-              fileResults.push( "* **" + mark.name + "** `(line " + ( index + 1 ) + ")` " + line );
+              fileResults.push( "- [ ]  **" + mark.name + "** `(line " + ( index + 1 ) + ")` " + line );
             }
           }
         } );
