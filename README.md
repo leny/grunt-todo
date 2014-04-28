@@ -78,6 +78,7 @@ Type: `Boolean`
 Default value: `false`
 
 When logging the founded marks to file, add an *github's markdown* checkbox for each mark.
+When logging the found marks to a file, add a [github flavoured markdown](https://github.com/blog/1825-task-lists-in-all-markdown-documents) checkbox for each mark.
 
 ### Usage Examples
 
