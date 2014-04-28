@@ -24,10 +24,10 @@
       "name": "Adam",
       "url": "http://quailcity.com"
     },
-	{
+    {
       "name": "Ed Wellbrook",
-	  "url": "http://edwellbrook.com"
-	}
+      "url": "http://edwellbrook.com"
+    }
   ],
   "repository": {
     "type": "git",
