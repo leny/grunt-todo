@@ -1,6 +1,6 @@
 {
   "name": "grunt-todo",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Find TODO, FIXME and NOTE inside project files",
   "keywords": [
     "gruntplugin",
@@ -23,7 +23,11 @@
     {
       "name": "Adam",
       "url": "http://quailcity.com"
-    }
+    },
+	{
+      "name": "Ed Wellbrook",
+	  "url": "http://edwellbrook.com"
+	}
   ],
   "repository": {
     "type": "git",
