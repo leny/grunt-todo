@@ -39,7 +39,7 @@ module.exports = function( grunt ) {
       logFileLines = [];
 
     if( options.file ) {
-      logFileLines.push( "# Grunt TODO" );
+      logFileLines.push( "# " + (options.title || "Grunt TODO") );
       logFileLines.push( "" );
     }
 

@@ -77,8 +77,13 @@ If `false` is given, the file will not be written.
 Type: `Boolean`  
 Default value: `false`
 
-When logging the founded marks to file, add an *github's markdown* checkbox for each mark.
 When logging the found marks to a file, add a [github flavoured markdown](https://github.com/blog/1825-task-lists-in-all-markdown-documents) checkbox for each mark.
+
+#### options.title
+Type: `String`  
+Default value: `Grunt TODO`
+
+When logging the founded marks to file, use this as title of the markdown document.
 
 ### Usage Examples
 
@@ -115,12 +120,13 @@ grunt.initConfig({
         }
       ],
       file: "report.md",
-      githubBoxes: true
+      githubBoxes: true,
+      "title": "Output File Title"
     },
     src: [
       'test/*'
-    ],
-  },
+    ]
+  }
 });
 ```
 
@@ -144,6 +150,7 @@ Many thanks to them. :)
 * **2014/03/14** : v0.2.0
 * **2014/04/27** : v0.2.1
 * **2014/04/27** : v0.2.2
+* **2014/04/28** : v0.2.3
 
 ## Notes
 
