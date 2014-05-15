@@ -1,0 +1,34 @@
+// Random Stylesheet for testing, with no mark
+
+$pixelBase = 10
+
+u( $values )
+    $list = unquote( "" )
+    $unit = ""
+
+    for $value in $values
+        if ( $value == "auto" ) or ( $value == "inherit" )
+            $unit = "string"
+        else
+            $unit = unit( $value )
+
+        if ( $value == 0 ) or ( $unit != "" )
+            append( $list, $value )
+        else
+            if $usePixels
+                append( $list, unit( $value, "px" ) )
+            else
+                append( $list, unit( ( $value / $pixelBase ), "rem" ) )
+
+    return $list
+
+fslh( $font-size, $line-height )
+    return unquote( "" + u( $font-size ) + "/" + u( $line-height ) + "" )
+
+centering( $position = absolute, $top = 0, $right = 0, $bottom = 0, $left = 0, $margin = auto )
+    position: $position
+    top: $top
+    right: $right
+    bottom: $bottom
+    left: $left
+    margin: $margin
