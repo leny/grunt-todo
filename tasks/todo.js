@@ -1,3 +1,4 @@
+
 /*
  * grunt-todo
  * https://github.com/Leny/grunt-todo
@@ -5,101 +6,98 @@
  * Copyright (c) 2013 Leny
  * Licensed under the MIT license.
  */
-
 "use strict";
+var chalk, table;
 
-var chalk = require( "chalk" );
-var table = require( "text-table" );
+chalk = require("chalk");
 
-module.exports = function( grunt ) {
+table = require("text-table");
 
-  grunt.registerMultiTask( "todo", "Find TODO, FIXME and NOTE inside project files", function() {
-    var options = this.options( {
-        marks: [
-          {
-            name: "FIX",
-            pattern: /FIXME/,
-            color: "red"
-          },
-          {
-            name: "TODO",
-            pattern: /TODO/,
-            color: "yellow"
-          },
-          {
-            name: "NOTE",
-            pattern: /NOTE/,
-            color: "blue"
-          }
-        ],
-        file: false
-      } ),
-      allowed_colors = [ "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "gray" ],
-      marks = [],
-      logFileLines = [];
-
-    if( options.file ) {
-      logFileLines.push( "# " + (options.title || "Grunt TODO") );
-      logFileLines.push( "" );
+module.exports = function(grunt) {
+  return grunt.registerMultiTask("todo", "Find TODO, FIXME and NOTE inside project files", function() {
+    var aAllowedColors, aLogFileLines, aMarks, oMark, oOptions, sGithubBox;
+    oOptions = this.options({
+      marks: [
+        {
+          name: "FIX",
+          pattern: /FIXME/,
+          color: "red"
+        }, {
+          name: "TODO",
+          pattern: /TODO/,
+          color: "yellow"
+        }, {
+          name: "NOTE",
+          pattern: /NOTE/,
+          color: "blue"
+        }
+      ],
+      file: false
+    });
+    aAllowedColors = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "gray"];
+    sGithubBox = !!oOptions.githubBoxes ? " [ ]" : "";
+    aMarks = [];
+    aLogFileLines = [];
+    if (oOptions.file) {
+      aLogFileLines.push("# " + (oOptions.title || "Grunt TODO"));
+      aLogFileLines.push("");
     }
-
-    for( var mark, i = -1; mark = options.marks[ ++i ] ; ) {
-      marks.push( {
-        name: mark.name || mark.pattern.toString(),
-        color: ( allowed_colors.indexOf( mark.color.toLowerCase() ) === -1 ) ? "cyan" : mark.color.toLowerCase(),
-        regex: ( mark.pattern instanceof RegExp ) ? mark.pattern : new RegExp( mark.pattern ),
-      } );
-    }
-
-    this.filesSrc.filter( function( filepath ) {
-
-      return grunt.file.exists( filepath ) && grunt.file.isFile( filepath );
-
-    } ).forEach( function( filepath ) {
-      var results = [],
-          fileResults = [];
-      grunt.file.read( filepath ).split( /\r*\n/ ).map( function( line, index ) {
-
-        marks.forEach( function( mark ) {
-          var result;
-          if( result = mark.regex.exec( line ) ) {
-
-            line = line.substring(result.index + result[0].length);
-
-            results.push( [
-              chalk.gray( "\tline " + ( index + 1 ) ),
-              chalk[ mark.color ]( mark.name ),
-              chalk.white.italic( line.trim().length > 80 ? ( line.trim().substr( 0, 80 ) + "…" ) : line.trim() )
-            ] );
-
-            if( options.file ) {
-              fileResults.push( "-" + ( !!options.githubBoxes ? " [ ]" : "" ) + " **" + mark.name + "** `(line " + ( index + 1 ) + ")` " + line );
+    aMarks = (function() {
+      var _i, _len, _ref, _results;
+      _ref = oOptions.marks;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        oMark = _ref[_i];
+        _results.push({
+          name: oMark.name || oMark.pattern.toString(),
+          color: aAllowedColors.indexOf(oMark.color.toLowerCase()) === -1 ? "cyan" : oMark.color.toLowerCase(),
+          regex: oMark.pattern instanceof RegExp ? oMark.pattern : new RegExp(oMark.pattern)
+        });
+      }
+      return _results;
+    })();
+    this.filesSrc.filter(function(sFilePath) {
+      return grunt.file.exists(sFilePath) && grunt.file.isFile(sFilePath);
+    }).forEach(function(sFilePath) {
+      var aFileResults, aResults;
+      aResults = [];
+      aFileResults = [];
+      grunt.file.read(sFilePath).split(/\r*\n/).map(function(sLine, iIndex) {
+        var oResult, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = aMarks.length; _i < _len; _i++) {
+          oMark = aMarks[_i];
+          if (oResult = oMark.regex.exec(sLine)) {
+            sLine = sLine.substring(oResult.index + oResult[0].length);
+            aResults.push([chalk.gray("\tline " + (iIndex + 1)), chalk[oMark.color](oMark.name), chalk.white.italic(sLine.trim().length > 80 ? "" + (sLine.trim().substr(0, 80)) + "…" : sLine.trim())]);
+            if (oOptions.file) {
+              _results.push(aFileResults.push("- " + sGithubBox + " **" + oMark.name + "** `(line " + (iIndex + 1) + ")` " + sLine));
+            } else {
+              _results.push(void 0);
             }
+          } else {
+            _results.push(void 0);
           }
-        } );
-      } );
-
-      if( results.length ) {
+        }
+        return _results;
+      });
+      if (aResults.length) {
         grunt.log.writeln();
-        grunt.log.writeln( chalk.underline( filepath ) );
+        grunt.log.writeln(chalk.underline(sFilePath));
         grunt.log.writeln();
-        grunt.log.writeln( table( results ) );
+        grunt.log.writeln(table(aResults));
       }
-
-      if( options.file && fileResults.length ) {
-        logFileLines.push( "## " + filepath );
-        logFileLines.push( "" );
-        logFileLines = logFileLines.concat( fileResults );
-        logFileLines.push( "" );
+      if (oOptions.file && aFileResults.length) {
+        aLogFileLines.push("## " + sFilePath);
+        aLogFileLines.push("");
+        aLogFileLines = aLogFileLines.concat(aFileResults);
+        return aLogFileLines.push("");
       }
-
-    } );
-
-    if( options.file ) {
-      grunt.file.write( options.file, logFileLines.join( "\n" ) );
+    });
+    if (oOptions.file) {
+      grunt.file.write(oOptions.file, aLogFileLines.join("\n"));
       grunt.log.writeln();
-      grunt.log.writeln( "Logged in " + chalk.yellow( options.file ) );
+      return grunt.log.writeln("Logged in " + (chalk.yellow(oOptions.file)));
     }
-  } );
-
+  });
 };
