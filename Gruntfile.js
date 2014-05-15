@@ -12,6 +12,17 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    coffee: {
+      options: {
+        bare: true
+      },
+      task: {
+        files: {
+          "tasks/todo.js": "src/todo.coffee"
+        }
+      }
+    },
+
     jshint: {
       all: [
         'Gruntfile.js',
@@ -19,7 +30,7 @@ module.exports = function(grunt) {
       ],
       options: {
         jshintrc: '.jshintrc',
-      },
+      }
     },
 
     // Configuration to be run.
@@ -28,7 +39,7 @@ module.exports = function(grunt) {
         options: {},
         src: [
           'test/*'
-        ],
+        ]
       },
       custom_options: {
         options: {
@@ -58,9 +69,10 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // By default, lint and run todo.
-  grunt.registerTask('default', ['jshint', 'todo']);
+  grunt.registerTask('default', ['coffee', 'jshint', 'todo']);
 
 };
