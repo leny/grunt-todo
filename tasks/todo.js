@@ -32,7 +32,8 @@ module.exports = function(grunt) {
           color: "blue"
         }
       ],
-      file: false
+      file: false,
+      colophon: false
     });
     aAllowedColors = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "gray"];
     sGithubBox = !!oOptions.githubBoxes ? " [ ]" : "";
@@ -95,6 +96,12 @@ module.exports = function(grunt) {
       }
     });
     if (oOptions.file) {
+      if (oOptions.colophon) {
+        aLogFileLines.push("---");
+        aLogFileLines.push("");
+        aLogFileLines.push("Last generated: " + grunt.template.today() + " by [grunt-todo](https://github.com/leny/grunt-todo).");
+        aLogFileLines.push("");
+      }
       grunt.file.write(oOptions.file, aLogFileLines.join("\n"));
       grunt.log.writeln();
       return grunt.log.writeln("Logged in " + (chalk.yellow(oOptions.file)));
