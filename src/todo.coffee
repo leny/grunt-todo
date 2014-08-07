@@ -28,8 +28,11 @@ module.exports = ( grunt ) ->
                     pattern: /NOTE/
                     color: "blue"
             ]
+            githubBoxes: no
             file: no
+            title: no
             colophon: no
+            usePackage: no
         aAllowedColors = [
             "black"
             "red"
@@ -44,9 +47,38 @@ module.exports = ( grunt ) ->
         sGithubBox = if !!oOptions.githubBoxes then " [ ]" else ""
         aMarks = []
         aLogFileLines = []
+        sDefaultTitle = "Grunt TODO"
+
+        if oOptions.usePackage
+            try
+                oProjectPackage = grunt.file.readJSON "#{ process.cwd() }/package.json"
+            catch oError
+                grunt.log.writeln ""
+                grunt.log.writeln chalk.yellow.bold( "Oops:" ), "No #{ chalk.cyan( 'package.json' ) } file found. Disabling #{ chalk.green( 'usePackage' ) } option."
+                oOptions.usePackage = no
 
         if oOptions.file
-            aLogFileLines.push "# " + ( oOptions.title or "Grunt TODO" )
+            if sTitle = ( oOptions.title or ( if oOptions.usePackage and oProjectPackage.name then oProjectPackage.name else no ) or sDefaultTitle )
+                if oOptions.usePackage
+                    if sHomePage = oProjectPackage.homepage
+                        aLogFileLines.push "# [#{ sTitle }]( #{ sHomePage } )"
+                    else
+                        aLogFileLines.push "# #{ sTitle }"
+                    aLogFileLines.push ""
+                    if sVersion = oProjectPackage.version
+                        aLogFileLines.push "**Version:** `#{ sVersion }`"
+                        aLogFileLines.push ""
+                    if sDescription = oProjectPackage.description
+                        aLogFileLines.push "> #{ sDescription }"
+                        aLogFileLines.push ""
+                        aLogFileLines.push "* * *"
+                        aLogFileLines.push ""
+                else
+                    aLogFileLines.push "# #{ sTitle }"
+                    aLogFileLines.push ""
+                aLogFileLines.push "## TODO" unless sTitle is sDefaultTitle
+            else
+                aLogFileLines.push "# #{ sDefaultTitle }"
             aLogFileLines.push ""
 
         aMarks = for oMark in oOptions.marks

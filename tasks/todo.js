@@ -15,7 +15,7 @@ table = require("text-table");
 
 module.exports = function(grunt) {
   return grunt.registerMultiTask("todo", "Find TODO, FIXME and NOTE inside project files", function() {
-    var aAllowedColors, aLogFileLines, aMarks, oMark, oOptions, sGithubBox;
+    var aAllowedColors, aLogFileLines, aMarks, oError, oMark, oOptions, oProjectPackage, sDefaultTitle, sDescription, sGithubBox, sHomePage, sTitle, sVersion;
     oOptions = this.options({
       marks: [
         {
@@ -32,15 +32,56 @@ module.exports = function(grunt) {
           color: "blue"
         }
       ],
+      githubBoxes: false,
       file: false,
-      colophon: false
+      title: false,
+      colophon: false,
+      usePackage: false
     });
     aAllowedColors = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "gray"];
     sGithubBox = !!oOptions.githubBoxes ? " [ ]" : "";
     aMarks = [];
     aLogFileLines = [];
+    sDefaultTitle = "Grunt TODO";
+    if (oOptions.usePackage) {
+      try {
+        oProjectPackage = grunt.file.readJSON("" + (process.cwd()) + "/package.json");
+      } catch (_error) {
+        oError = _error;
+        grunt.log.writeln("");
+        grunt.log.writeln(chalk.yellow.bold("Oops:"), "No " + (chalk.cyan('package.json')) + " file found. Disabling " + (chalk.green('usePackage')) + " option.");
+        oOptions.usePackage = false;
+      }
+    }
     if (oOptions.file) {
-      aLogFileLines.push("# " + (oOptions.title || "Grunt TODO"));
+      if (sTitle = oOptions.title || (oOptions.usePackage && oProjectPackage.name ? oProjectPackage.name : false) || sDefaultTitle) {
+        if (oOptions.usePackage) {
+          if (sHomePage = oProjectPackage.homepage) {
+            aLogFileLines.push("# [" + sTitle + "]( " + sHomePage + " )");
+          } else {
+            aLogFileLines.push("# " + sTitle);
+          }
+          aLogFileLines.push("");
+          if (sVersion = oProjectPackage.version) {
+            aLogFileLines.push("**Version:** `" + sVersion + "`");
+            aLogFileLines.push("");
+          }
+          if (sDescription = oProjectPackage.description) {
+            aLogFileLines.push("> " + sDescription);
+            aLogFileLines.push("");
+            aLogFileLines.push("* * *");
+            aLogFileLines.push("");
+          }
+        } else {
+          aLogFileLines.push("# " + sTitle);
+          aLogFileLines.push("");
+        }
+        if (sTitle !== sDefaultTitle) {
+          aLogFileLines.push("## TODO");
+        }
+      } else {
+        aLogFileLines.push("# " + sDefaultTitle);
+      }
       aLogFileLines.push("");
     }
     aMarks = (function() {
