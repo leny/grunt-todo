@@ -91,6 +91,13 @@ Default value: `Grunt TODO`
 
 When logging the founded marks to file, use this as title of the markdown document.
 
+#### options.colophon
+
+Type: `Boolean`  
+Default value: `false`
+
+When logging the found marks to file, use colophon and timestamp as footer of the markdown document.
+
 ### Usage Examples
 
 #### Default Options

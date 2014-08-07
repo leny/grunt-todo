@@ -55,7 +55,8 @@ module.exports = function(grunt) {
             }
           ],
           file: "report.md",
-          githubBoxes: true
+          githubBoxes: true,
+          colophon: true
         },
         src: [
           'test/*'
