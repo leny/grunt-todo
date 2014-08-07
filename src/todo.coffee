@@ -89,11 +89,12 @@ module.exports = ( grunt ) ->
                     aLogFileLines.push ""
 
         if oOptions.file
-    
+
             if oOptions.colophon
-                aLogFileLines.push "---"
                 aLogFileLines.push ""
-                aLogFileLines.push ( "Last generated: " + grunt.template.today() + " by [grunt-todo](https://github.com/leny/grunt-todo)." )
+                aLogFileLines.push "* * *"
+                aLogFileLines.push ""
+                aLogFileLines.push "Last generated: #{ grunt.template.today() } by [grunt-todo](https://github.com/leny/grunt-todo)."
                 aLogFileLines.push ""
 
             grunt.file.write oOptions.file, aLogFileLines.join "\n"
