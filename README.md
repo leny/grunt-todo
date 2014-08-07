@@ -98,6 +98,13 @@ Default value: `false`
 
 When logging the found marks to file, use colophon and timestamp as footer of the markdown document.
 
+#### options.usePackage
+
+Type: `Boolean`  
+Default value: `false`
+
+When enabled, if you launch your grunt-todo task from a folder containing a `package.json` file (like 99% of use cases), grunt-todo will use some of the package's informations to make the report file a little more informative (use project's name as title, show version and description, links to the homepage…).
+
 ### Usage Examples
 
 #### Default Options
@@ -136,7 +143,8 @@ grunt.initConfig({
       ],
       file: "report.md",
       githubBoxes: true,
-      "title": "Output File Title"
+      colophon: true,
+      usePackage: true
     },
     src: [
       'test/*'
