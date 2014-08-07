@@ -163,6 +163,7 @@ Lint and test your code using [Grunt](http://gruntjs.com/).
 * [brutalhonesty](https://github.com/brutalhonesty)
 * [zachwolf](https://github.com/zachwolf)
 * [edwellbrook](https://github.com/edwellbrook)
+* [furzeface](https://github.com/furzeface)
 
 Many thanks to them. :)
 
