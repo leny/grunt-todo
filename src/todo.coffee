@@ -33,6 +33,7 @@ module.exports = ( grunt ) ->
             title: no
             colophon: no
             usePackage: no
+            logOutput: yes
         aAllowedColors = [
             "black"
             "red"
@@ -108,7 +109,7 @@ module.exports = ( grunt ) ->
 
                                 aFileResults.push "- #{ sGithubBox } **#{ oMark.name }** `(line #{ iIndex + 1 })` #{ sLine }" if oOptions.file
 
-                if aResults.length
+                if aResults.length and oOptions.logOutput
                     grunt.log.writeln()
                     grunt.log.writeln chalk.underline sFilePath
                     grunt.log.writeln()

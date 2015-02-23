@@ -36,7 +36,8 @@ module.exports = function(grunt) {
       file: false,
       title: false,
       colophon: false,
-      usePackage: false
+      usePackage: false,
+      logOutput: true
     });
     aAllowedColors = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "gray"];
     sGithubBox = !!oOptions.githubBoxes ? " [ ]" : "";
@@ -123,7 +124,7 @@ module.exports = function(grunt) {
         }
         return _results;
       });
-      if (aResults.length) {
+      if (aResults.length && oOptions.logOutput) {
         grunt.log.writeln();
         grunt.log.writeln(chalk.underline(sFilePath));
         grunt.log.writeln();
