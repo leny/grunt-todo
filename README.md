@@ -46,7 +46,7 @@ grunt.initConfig({
 #### options.marks
 
 Type: `Array`  
-Default value: 
+Default value:  
 ```js
 {
   name: "FIX",
@@ -171,11 +171,13 @@ Lint and test your code using [Grunt](http://gruntjs.com/).
 * [zachwolf](https://github.com/zachwolf)
 * [edwellbrook](https://github.com/edwellbrook)
 * [furzeface](https://github.com/furzeface)
+* [mstrutt](https://github.com/mstrutt)
 
 Many thanks to them. :)
 
 ## Release History
 
+* **2015/02/28** : v0.5.0
 * **2014/08/07** : v0.4.0
 * **2014/07/15** : v0.3.1
 * **2014/05/15** : v0.3.0
