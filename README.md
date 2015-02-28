@@ -105,6 +105,13 @@ Default value: `false`
 
 When enabled, if you launch your grunt-todo task from a folder containing a `package.json` file (like 99% of use cases), grunt-todo will use some of the package's informations to make the report file a little more informative (use project's name as title, show version and description, links to the homepage…).
 
+#### options.logOutput
+
+Type: `Boolean`  
+Default value: `true`
+
+You can disable the task to output the marks on the console by setting this to `false`.
+
 ### Usage Examples
 
 #### Default Options
