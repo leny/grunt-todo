@@ -63,6 +63,29 @@ module.exports = function(grunt) {
           'test/*'
         ],
       },
+      custom_options_no_logging: {
+        options: {
+          marks: [
+            {
+              pattern: "BURP",
+              color: "pink"
+            },
+            {
+              name: "TODO",
+              pattern: /TODO/,
+              color: "yellow"
+            }
+          ],
+          file: "report-2.md",
+          githubBoxes: true,
+          colophon: true,
+          usePackage: true,
+          logOutput: false
+        },
+        src: [
+          'test/*'
+        ],
+      },
     },
 
   });
