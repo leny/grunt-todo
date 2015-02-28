@@ -46,7 +46,7 @@ module.exports = function(grunt) {
     sDefaultTitle = "Grunt TODO";
     if (oOptions.usePackage) {
       try {
-        oProjectPackage = grunt.file.readJSON("" + (process.cwd()) + "/package.json");
+        oProjectPackage = grunt.file.readJSON((process.cwd()) + "/package.json");
       } catch (_error) {
         oError = _error;
         grunt.log.writeln("");
@@ -86,18 +86,18 @@ module.exports = function(grunt) {
       aLogFileLines.push("");
     }
     aMarks = (function() {
-      var _i, _len, _ref, _results;
-      _ref = oOptions.marks;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        oMark = _ref[_i];
-        _results.push({
+      var i, len, ref, results;
+      ref = oOptions.marks;
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        oMark = ref[i];
+        results.push({
           name: oMark.name || oMark.pattern.toString(),
           color: aAllowedColors.indexOf(oMark.color.toLowerCase()) === -1 ? "cyan" : oMark.color.toLowerCase(),
           regex: oMark.pattern instanceof RegExp ? oMark.pattern : new RegExp(oMark.pattern)
         });
       }
-      return _results;
+      return results;
     })();
     this.filesSrc.filter(function(sFilePath) {
       return grunt.file.exists(sFilePath) && grunt.file.isFile(sFilePath);
@@ -106,23 +106,23 @@ module.exports = function(grunt) {
       aResults = [];
       aFileResults = [];
       grunt.file.read(sFilePath).split(/\r*\n/).map(function(sLine, iIndex) {
-        var oResult, _i, _len, _results;
-        _results = [];
-        for (_i = 0, _len = aMarks.length; _i < _len; _i++) {
-          oMark = aMarks[_i];
+        var i, len, oResult, results;
+        results = [];
+        for (i = 0, len = aMarks.length; i < len; i++) {
+          oMark = aMarks[i];
           if (oResult = oMark.regex.exec(sLine)) {
             sLine = sLine.substring(oResult.index + oResult[0].length);
-            aResults.push([chalk.gray("\tline " + (iIndex + 1)), chalk[oMark.color](oMark.name), chalk.white.italic(sLine.trim().length > 80 ? "" + (sLine.trim().substr(0, 80)) + "…" : sLine.trim())]);
+            aResults.push([chalk.gray("\tline " + (iIndex + 1)), chalk[oMark.color](oMark.name), chalk.white.italic(sLine.trim().length > 80 ? (sLine.trim().substr(0, 80)) + "…" : sLine.trim())]);
             if (oOptions.file) {
-              _results.push(aFileResults.push("- " + sGithubBox + " **" + oMark.name + "** `(line " + (iIndex + 1) + ")` " + sLine));
+              results.push(aFileResults.push("- " + sGithubBox + " **" + oMark.name + "** `(line " + (iIndex + 1) + ")` " + sLine));
             } else {
-              _results.push(void 0);
+              results.push(void 0);
             }
           } else {
-            _results.push(void 0);
+            results.push(void 0);
           }
         }
-        return _results;
+        return results;
       });
       if (aResults.length && oOptions.logOutput) {
         grunt.log.writeln();
