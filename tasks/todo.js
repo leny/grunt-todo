@@ -37,7 +37,8 @@ module.exports = function(grunt) {
       title: false,
       colophon: false,
       usePackage: false,
-      logOutput: true
+      logOutput: true,
+      ngdoc: false
     });
     aAllowedColors = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "gray"];
     sGithubBox = !!oOptions.githubBoxes ? " [ ]" : "";
@@ -55,6 +56,12 @@ module.exports = function(grunt) {
       }
     }
     if (oOptions.file) {
+      if (oOptions.ngdoc) {
+        aLogFileLines.push('@ngdoc overview');
+        aLogFileLines.push('@name ' + (oOptions.title !== '' ? oOptions.title : sTitle));
+        aLogFileLines.push('@description');
+        aLogFileLines.push('');
+      }
       if (sTitle = oOptions.title || (oOptions.usePackage && oProjectPackage.name ? oProjectPackage.name : false) || sDefaultTitle) {
         if (oOptions.usePackage) {
           if (sHomePage = oProjectPackage.homepage) {
