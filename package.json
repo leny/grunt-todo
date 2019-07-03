@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "grunt": "^1.0.4",
-    "grunt-contrib-coffee": "^0.13.0",
+    "grunt-contrib-coffee": "^2.1.0",
     "grunt-contrib-jshint": "^2.0.0"
   }
 }
