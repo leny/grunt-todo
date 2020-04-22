@@ -34,6 +34,7 @@ module.exports = ( grunt ) ->
             colophon: no
             usePackage: no
             logOutput: yes
+            ngdoc: false,
         aAllowedColors = [
             "black"
             "red"
@@ -59,6 +60,11 @@ module.exports = ( grunt ) ->
                 oOptions.usePackage = no
 
         if oOptions.file
+            if oOptions.ngdoc
+                aLogFileLines.push '@ngdoc overview'
+                aLogFileLines.push '@name ' + (if oOptions.title != '' then oOptions.title else sTitle)
+                aLogFileLines.push '@description'
+                aLogFileLines.push ''
             if sTitle = ( oOptions.title or ( if oOptions.usePackage and oProjectPackage.name then oProjectPackage.name else no ) or sDefaultTitle )
                 if oOptions.usePackage
                     if sHomePage = oProjectPackage.homepage
